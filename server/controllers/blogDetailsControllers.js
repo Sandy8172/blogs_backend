@@ -11,7 +11,6 @@ const updateData = async (req, res) => {
       summary,
     });
     res.status(201).json({ id: details._id });
-    console.log("Added Successfuly");
   } catch (error) {
     console.log(error);
     res.data("unable to update");
@@ -35,7 +34,6 @@ const getBlogData = async (req, res) => {
 };
 const getBlogById = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   try {
     const data = await BlogDetails.findOne({ _id: id });
     res.status(200).json(data);

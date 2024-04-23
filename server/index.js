@@ -3,7 +3,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
 require("dotenv").config({ path: "../.env" });
-const User = require("./models/users");
 const blogRouters = require("./routes/blogDataRoutes");
 const dbURI = process.env.dbURI;
 
