@@ -1,6 +1,6 @@
 const BlogDetails = require("../models/blogData");
 
-const updateData = async (req, res) => {
+const uploadNewBlog = async (req, res) => {
   const { username, type, title, genre, summary } = req.body;
   try {
     const details = await BlogDetails.create({
@@ -66,10 +66,30 @@ const getBlogsCount = async (req, res) => {
   } catch (error) {}
 };
 
+const updateBlogs = async (req, res) => {
+  const { id } = req.params;
+  const { title, summary } = req.body;
+  try {
+    const blog = await BlogDetails.findByIdAndUpdate(
+      id,
+      { title, summary },
+      { new: true }
+    );
+    if (!blog) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.status(201).json(blog);
+  } catch (error) {
+    console.error("Error updating blog:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
-  updateData,
+  uploadNewBlog,
   getBlogData,
   getBlogById,
   deleteBlogHandler,
   getBlogsCount,
+  updateBlogs,
 };

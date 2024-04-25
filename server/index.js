@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const app = express();
 require("dotenv").config({ path: "../.env" });
 const blogRouters = require("./routes/blogDataRoutes");
+const PORT = process.env.PORT;
+const HOST = process.env.HOST;
 const dbURI = process.env.dbURI;
 
 mongoose
@@ -21,7 +23,6 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 app.use("/", blogRouters);
 
-const PORT = 3080;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Server is running on port ${PORT} ip ${HOST}`);
 });
